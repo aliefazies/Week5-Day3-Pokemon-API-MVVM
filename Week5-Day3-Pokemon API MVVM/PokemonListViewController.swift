@@ -15,6 +15,8 @@ class PokemonListViewController: UIViewController {
     var viewModel: PokemonListViewModel?
     var pokemon: PokemonResponse?
     
+    let url = "https://pokeapi.co/api/v2/pokemon?offset=0&limit=100"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -24,11 +26,10 @@ class PokemonListViewController: UIViewController {
         collectionView.dataSource = self
         collectionView.register(UINib(nibName: "PokemonCell", bundle: nil), forCellWithReuseIdentifier: PokemonCell.identifier)
         
-        self.viewModel = PokemonListViewModel(urlString: "https://pokeapi.co/api/v2/pokemon?offset=0&limit=100", apiService: ApiService())
+        self.viewModel = PokemonListViewModel(urlString: url , apiService: ApiService())
         
         self.viewModel?.bindPokemonData = { dataPokemon in
             if let dataPokemon = dataPokemon {
-                print(dataPokemon)
                 self.pokemon = dataPokemon
             }
             DispatchQueue.main.async {
@@ -58,6 +59,14 @@ extension PokemonListViewController: UICollectionViewDelegateFlowLayout, UIColle
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let viewController = storyboard.instantiateViewController(withIdentifier: "PokemonDetailViewController") as! PokemonDetailViewController
+        viewController.selectedPokemon = pokemon?.results[indexPath.row]
+        navigationController?.pushViewController(viewController, animated: true)
     }
     
 }

@@ -7,13 +7,13 @@
 
 import Foundation
 
-protocol PhotoViewModelProtocol {
+protocol PokemonViewModelProtocol {
     var urlString: String { get set }
     var bindPokemonData: ((PokemonResponse?) -> ())? {get set}
     func fetchDataPokemon()
 }
 
-class PokemonListViewModel: PhotoViewModelProtocol {
+class PokemonListViewModel: PokemonViewModelProtocol {
     
     private var apiService: ApiServiceProtocol?
     var data: PokemonResponse?

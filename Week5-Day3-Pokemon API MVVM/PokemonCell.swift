@@ -22,8 +22,9 @@ class PokemonCell: UICollectionViewCell {
     
     func configurePokemonCell(pokemon: Pokemon?, indexPath: IndexPath) {
         if let pokemon = pokemon {
-            pokemonNameLabel.text = pokemon.name
+            pokemonNameLabel.text = pokemon.name.capitalized
             pokemonImage.sd_setImage(with: URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/\(indexPath.row + 1).png"))
+    
             pokemonImage.contentMode = .scaleAspectFit
         }
         

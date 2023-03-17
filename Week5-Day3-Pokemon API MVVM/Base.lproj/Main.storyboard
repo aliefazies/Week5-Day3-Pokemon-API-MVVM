@@ -46,6 +46,69 @@
             </objects>
             <point key="canvasLocation" x="973.28244274809151" y="-2.1126760563380285"/>
         </scene>
+        <!--Pokemon Detail View Controller-->
+        <scene sceneID="g7l-Xq-b8U">
+            <objects>
+                <viewController storyboardIdentifier="PokemonDetailViewController" id="FYd-AD-MEw" customClass="PokemonDetailViewController" customModule="Week5_Day3_Pokemon_API_MVVM" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="qj9-TZ-BaP">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6GA-1h-dWM">
+                                <rect key="frame" x="16" y="75" width="361" height="735"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mdG-s2-W2K">
+                                        <rect key="frame" x="8" y="8.0000000000000018" width="278.66666666666669" height="28.666666666666671"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d8Q-hm-Gsm">
+                                        <rect key="frame" x="294.66666666666669" y="8.0000000000000018" width="58.333333333333314" height="28.666666666666671"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="24"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VLZ-1O-Co2">
+                                        <rect key="frame" x="0.0" y="52.666666666666671" width="361" height="128"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="128" id="HeW-Va-jHa"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="VLZ-1O-Co2" secondAttribute="trailing" id="0c1-3r-5C3"/>
+                                    <constraint firstItem="d8Q-hm-Gsm" firstAttribute="top" secondItem="6GA-1h-dWM" secondAttribute="top" constant="8" id="Na4-yh-Hfb"/>
+                                    <constraint firstItem="mdG-s2-W2K" firstAttribute="leading" secondItem="6GA-1h-dWM" secondAttribute="leading" constant="8" id="Toh-AX-6Ha"/>
+                                    <constraint firstItem="VLZ-1O-Co2" firstAttribute="leading" secondItem="6GA-1h-dWM" secondAttribute="leading" id="UP1-ws-ATX"/>
+                                    <constraint firstItem="d8Q-hm-Gsm" firstAttribute="leading" secondItem="mdG-s2-W2K" secondAttribute="trailing" constant="8" id="fVL-Hc-Lt0"/>
+                                    <constraint firstItem="mdG-s2-W2K" firstAttribute="top" secondItem="6GA-1h-dWM" secondAttribute="top" constant="8" id="oB3-GY-3Gn"/>
+                                    <constraint firstItem="VLZ-1O-Co2" firstAttribute="top" secondItem="mdG-s2-W2K" secondAttribute="bottom" constant="16" id="sPg-NK-jaX"/>
+                                    <constraint firstAttribute="trailing" secondItem="d8Q-hm-Gsm" secondAttribute="trailing" constant="8" id="tDX-jE-Amn"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="D5L-uE-6nX"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="6GA-1h-dWM" firstAttribute="leading" secondItem="qj9-TZ-BaP" secondAttribute="leading" constant="16" id="Hwp-43-yBo"/>
+                            <constraint firstItem="6GA-1h-dWM" firstAttribute="bottom" secondItem="D5L-uE-6nX" secondAttribute="bottom" constant="-8" id="Ijp-mQ-Meh"/>
+                            <constraint firstItem="6GA-1h-dWM" firstAttribute="top" secondItem="D5L-uE-6nX" secondAttribute="top" constant="16" id="Jwv-VO-zhG"/>
+                            <constraint firstAttribute="trailing" secondItem="6GA-1h-dWM" secondAttribute="trailing" constant="16" id="wq0-lU-Yv8"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="background" destination="6GA-1h-dWM" id="VXl-UG-l9z"/>
+                        <outlet property="pokemonHPLabel" destination="d8Q-hm-Gsm" id="KUd-KN-KrJ"/>
+                        <outlet property="pokemonImage" destination="VLZ-1O-Co2" id="L42-td-Tdw"/>
+                        <outlet property="pokemonNameLabel" destination="mdG-s2-W2K" id="msi-Ho-kTb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Dii-1u-xeV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1907.6335877862596" y="-2.1126760563380285"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="Zgd-eb-4C0">
             <objects>
