@@ -10,7 +10,6 @@ import UIKit
 
 extension UIImageView {
 
-    
         func imageFromServerURL(_ URLString: String, placeHolder: UIImage?) {
 
         self.image = nil

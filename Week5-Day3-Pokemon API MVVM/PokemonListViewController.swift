@@ -15,7 +15,7 @@ class PokemonListViewController: UIViewController {
     var viewModel: PokemonListViewModel?
     var pokemon: PokemonResponse?
     
-    let url = "https://pokeapi.co/api/v2/pokemon?offset=0&limit=100"
+    let url = "https://pokeapi.co/api/v2/pokemon?offset=0&limit=1000"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,7 +54,8 @@ extension PokemonListViewController: UICollectionViewDelegateFlowLayout, UIColle
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.size.width / 2.3, height: collectionView.frame.height / 5)
+//        return CGSize(width: collectionView.frame.size.width / 2.3, height: collectionView.frame.height / 5)
+        return CGSize(width: 104, height: 108)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -68,6 +69,5 @@ extension PokemonListViewController: UICollectionViewDelegateFlowLayout, UIColle
         viewController.selectedPokemon = pokemon?.results[indexPath.row]
         navigationController?.pushViewController(viewController, animated: true)
     }
-    
 }
 

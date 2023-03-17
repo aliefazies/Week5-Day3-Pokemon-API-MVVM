@@ -33,7 +33,7 @@ class PokemonDetailViewModel: PokemonDetailViewModelProtocol {
     }
     
     func fetchDataPokemonDetail() {
-        self.apiService?.loadDetailPokemon(model: PokemonDetailResponse.self, completion: { response in
+        self.apiService?.loadPokemon(model: PokemonDetailResponse.self, completion: { response in
             switch response {
             case .success(let success):
                 self.bindPokemonDetailData?(success)

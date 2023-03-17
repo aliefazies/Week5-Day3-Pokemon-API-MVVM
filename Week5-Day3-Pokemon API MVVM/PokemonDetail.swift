@@ -17,7 +17,12 @@ struct PokemonDetailResponse: Codable {
 }
 
 struct Move: Codable {
-    let move: OnlyName
+    let move: MoveElement
+}
+
+struct MoveElement: Codable {
+    let name: String
+    let url: String
 }
 
 struct StatClass: Codable {

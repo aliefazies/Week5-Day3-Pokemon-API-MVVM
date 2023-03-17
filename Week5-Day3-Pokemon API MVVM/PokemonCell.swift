@@ -15,6 +15,9 @@ class PokemonCell: UICollectionViewCell {
     @IBOutlet weak var pokemonNameLabel: UILabel!
     @IBOutlet weak var background: UIView!
     
+    @IBOutlet weak var bottomBg: UIView!
+    
+    @IBOutlet weak var card: UIView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -28,10 +31,18 @@ class PokemonCell: UICollectionViewCell {
             pokemonImage.contentMode = .scaleAspectFit
         }
         
-        background.layer.cornerRadius = 6
+        background.layer.cornerRadius = 8
         background.layer.masksToBounds = true
-//        background.layer.borderWidth = 1
-//        background.layer.borderColor = UIColor.black.cgColor
+        bottomBg.layer.cornerRadius = 16
+        bottomBg.layer.masksToBounds = true
+        
+        layer.masksToBounds = false
+        layer.shadowOpacity = 0.3
+        layer.shadowRadius = 8
+        layer.shadowOffset = CGSize(width: 2, height: 2)
+        layer.shadowColor = UIColor.black.cgColor
+//        card.layer.borderWidth = 1
+//        card.layer.borderColor = UIColor.black.cgColor
     }
     
     func setGradientBackground() {
