@@ -49,7 +49,7 @@ extension PokemonListViewController: UICollectionViewDelegateFlowLayout, UIColle
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PokemonCell.identifier, for: indexPath) as? PokemonCell else { return UICollectionViewCell() }
         
         cell.configurePokemonCell(pokemon: pokemon?.results[indexPath.row], indexPath: indexPath)
-        cell.setGradientBackground()
+//        cell.setGradientBackground()
         return cell
     }
     
