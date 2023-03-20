@@ -22,6 +22,8 @@ class PokemonDetailViewController: UIViewController {
     
     var isHp: Int = 0
     
+    var pokemonStatsName = ["HP", "Attack", "Defense", "Sp.Atk", "Sp.Def", "Spd"]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -34,20 +36,50 @@ class PokemonDetailViewController: UIViewController {
         
         self.viewModel = PokemonDetailViewModel(urlString: selectedPokemon?.url ?? "", apiService: ApiService())
         
+        self.horizontalStack.distribution = .fillEqually
+        self.horizontalStack.alignment = .top
+        self.horizontalStack.spacing = 24
+        self.verticalStack.distribution = .fillEqually
+//        self.verticalStack.alignment = .top
+        self.verticalStack.spacing = 2
+        
         self.viewModel?.bindPokemonDetailData = { dataPokemonDetail in
             if let dataPokemonDetail = dataPokemonDetail {
                 self.pokemonSelectedDetail = dataPokemonDetail
                 
                 self.isHp = self.pokemonSelectedDetail?.stats[0].baseStat ?? 0
+                
+                for i in 0..<(self.pokemonSelectedDetail?.stats.count ?? 0) {
+                    let stackView = UIStackView()
+                    stackView.alignment = .top
+                    stackView.axis = .horizontal
+                    stackView.distribution = .equalSpacing
+                    stackView.contentMode = .scaleAspectFill
+//                    stackView.spacing = 8
+                    
+                    let statName = UILabel()
+                    statName.text = self.pokemonStatsName[i]
+                    statName.font = UIFont.systemFont(ofSize: 12, weight: .bold)
+                    statName.textColor = self.setBackgroundLabel(type: self.pokemonSelectedDetail?.types[0].type.name ?? "")
+                    
+                    let statCount = UILabel()
+                    let pokemonStat = self.pokemonSelectedDetail?.stats[i].baseStat ?? 0
+                    statCount.text = "\(pokemonStat)"
+                    statCount.font = UIFont.systemFont(ofSize: 12, weight: .medium)
+                    
+                    stackView.addArrangedSubview(statName)
+                    stackView.addArrangedSubview(statCount)
+                    
+//                    statName.widthAnchor.constraint(equalToConstant: 64).isActive = true
+                    self.verticalStack.addArrangedSubview(stackView)
+                }
+                
                 self.pokemonImage.sd_setImage(with: URL(string: self.pokemonSelectedDetail?.sprites.other.home.frontDefault ?? ""))
                 
                 
                 for i in 0..<(self.pokemonSelectedDetail?.types.count ?? 0) {
-                    var pokemonType = self.pokemonSelectedDetail?.types[i].type.name ?? ""
+                    let pokemonType = self.pokemonSelectedDetail?.types[i].type.name ?? ""
                     
-                    self.horizontalStack.distribution = .fillEqually
-                    self.horizontalStack.alignment = .top
-                    self.horizontalStack.spacing = 24
                     
                     let typeLabel = PaddingLabel(withInsets: 8, 8, 8, 8)
                     typeLabel.layer.cornerRadius = 8
