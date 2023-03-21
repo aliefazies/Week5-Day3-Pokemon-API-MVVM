@@ -12,23 +12,23 @@ class PokemonListViewController: UIViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
     
-    var viewModel: PokemonListViewModel?
-    var pokemon: PokemonResponse?
+    private var viewModel: PokemonListViewModel?
+    
+    private var pokemon: PokemonResponse?
     
     let url = "https://pokeapi.co/api/v2/pokemon?offset=0&limit=1000"
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    fileprivate func setupCollectionView() {
         // Do any additional setup after loading the view.
-        title = "Pokemon"
-        navigationController?.navigationBar.prefersLargeTitles = true
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(UINib(nibName: "PokemonCell", bundle: nil), forCellWithReuseIdentifier: PokemonCell.identifier)
+    }
+    
+    fileprivate func setupViewModel() {
+        viewModel = PokemonListViewModel(urlString: url , apiService: ApiService())
         
-        self.viewModel = PokemonListViewModel(urlString: url , apiService: ApiService())
-        
-        self.viewModel?.bindPokemonData = { dataPokemon in
+        viewModel?.bindPokemonData = { dataPokemon in
             if let dataPokemon = dataPokemon {
                 self.pokemon = dataPokemon
             }
@@ -37,6 +37,19 @@ class PokemonListViewController: UIViewController {
             }
         }
     }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupCollectionView()
+        setupViewModel()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        title = "Pokemon"
+        navigationController?.navigationBar.prefersLargeTitles = true
+    }
+    
 }
 
 extension PokemonListViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
@@ -63,9 +76,8 @@ extension PokemonListViewController: UICollectionViewDelegateFlowLayout, UIColle
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let viewController = storyboard.instantiateViewController(withIdentifier: "PokemonDetailViewController") as! PokemonDetailViewController
+        guard let viewController = storyboard.instantiateViewController(withIdentifier: "PokemonDetailViewController") as? PokemonDetailViewController else { return }
         viewController.selectedPokemon = pokemon?.results[indexPath.row]
         navigationController?.pushViewController(viewController, animated: true)
     }

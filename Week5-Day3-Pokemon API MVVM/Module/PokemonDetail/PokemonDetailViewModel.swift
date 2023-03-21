@@ -10,6 +10,7 @@ import Foundation
 protocol PokemonDetailViewModelProtocol {
     var urlString: String { get set }
     var bindPokemonDetailData: ((PokemonDetailResponse?) -> ())? {get set}
+    var bindPokemonMoveData: ((PokemonMove?) -> ())? {get set}
     func fetchDataPokemonDetail()
 }
 
@@ -20,6 +21,7 @@ class PokemonDetailViewModel: PokemonDetailViewModelProtocol {
     
     var urlString: String
     var bindPokemonDetailData: ((PokemonDetailResponse?) -> ())?
+    var bindPokemonMoveData: ((PokemonMove?) -> ())?
     
     
     init(urlString: String, apiService: ApiServiceProtocol) {
@@ -30,6 +32,7 @@ class PokemonDetailViewModel: PokemonDetailViewModelProtocol {
             self.apiService?.get(url: url)
         }
         fetchDataPokemonDetail()
+        fetchDataMoveDetail()
     }
     
     func fetchDataPokemonDetail() {
@@ -41,7 +44,16 @@ class PokemonDetailViewModel: PokemonDetailViewModelProtocol {
                 self.bindPokemonDetailData?(nil)
             }
         })
-
     }
     
+    func fetchDataMoveDetail() {
+        self.apiService?.loadPokemon(model: PokemonMove.self, completion: { response in
+            switch response {
+            case .success(let success):
+                self.bindPokemonMoveData?(success)
+            case .failure(_):
+                self.bindPokemonMoveData?(nil)
+            }
+        })
+    }
 }

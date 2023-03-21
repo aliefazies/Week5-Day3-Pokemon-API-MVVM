@@ -180,6 +180,7 @@ extension PokemonDetailViewController: UITableViewDelegate, UITableViewDataSourc
         cell.clipsToBounds = true
         cell.moveLabel.font = UIFont.systemFont(ofSize: 12, weight: .bold)
         cell.moveLabel.textColor = self.setBackgroundLabel(type: self.pokemonSelectedDetail?.types[0].type.name ?? "")
+        cell.configure(moveUrl: self.pokemonSelectedDetail?.moves[indexPath.row].move.url)
         return cell
     }
     
@@ -188,6 +189,13 @@ extension PokemonDetailViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 28
+        return 36
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        guard let viewController = storyboard.instantiateViewController(withIdentifier: "PokemonMoveViewController") as? PokemonMoveViewController else { return }
+        viewController.pokemonMoveUrl = self.pokemonSelectedDetail?.moves[indexPath.row].move.url ?? ""
+        navigationController?.pushViewController(viewController, animated: true)
     }
 }

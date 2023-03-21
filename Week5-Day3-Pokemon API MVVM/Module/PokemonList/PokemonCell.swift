@@ -15,7 +15,6 @@ class PokemonCell: UICollectionViewCell {
     @IBOutlet weak var pokemonNameLabel: UILabel!
     @IBOutlet weak var background: UIView!
     @IBOutlet weak var bottomBg: UIView!
-    @IBOutlet weak var card: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
